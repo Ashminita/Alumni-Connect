@@ -30,7 +30,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:5173",  // No slash!
+  origin: "https://alumni-connect-pi.vercel.app/",  // No slash!
   credentials: true,
 }));
 app.use(express.urlencoded({ extended: true }));
