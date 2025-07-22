@@ -21,7 +21,7 @@ const EditProfile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/me', {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE}/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -33,7 +33,8 @@ const EditProfile = () => {
         });
 
         if (res.data.profilePhoto) {
-          setPreview(`http://localhost:5000${res.data.profilePhoto}`);
+          setPreview(`${process.env.REACT_APP_API_BASE}${res.data.profilePhoto}`);
+;
         }
       } catch (err) {
         setError('Failed to fetch profile data');
@@ -82,7 +83,7 @@ const EditProfile = () => {
         formDataToSend.append('profilePhoto', selectedFile);
       }
 
-      const response = await axios.put('http://localhost:5000/alumni/profile', formDataToSend, {
+      const response = await axios.put(`${process.env.REACT_APP_API_BASE}/alumni/profile`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

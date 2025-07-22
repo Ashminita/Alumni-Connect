@@ -30,7 +30,7 @@ const AchievementList = () => {
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/achievements?page=1&limit=10");
+        const response = await fetch(`${process.env.REACT_APP_API_BASE}/api/achievements?page=1&limit=10`);
         if (!response.ok) {
           throw new Error(`HTTP Error! status: ${response.status}`);
         }

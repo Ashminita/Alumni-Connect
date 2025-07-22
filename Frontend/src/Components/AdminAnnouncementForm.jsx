@@ -15,7 +15,7 @@ const AdminAnnouncementForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/announcements', formData);
+      await axios.post(`${process.env.REACT_APP_API_BASE}/api/announcements`, formData);
       alert('Announcement created successfully!');
       setFormData({ title: '', description: '' });
     } catch (error) {

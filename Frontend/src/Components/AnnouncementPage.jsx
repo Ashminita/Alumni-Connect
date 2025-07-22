@@ -6,7 +6,8 @@ const AnnouncementPage = () => {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/announcements')
+    axios.get(`${process.env.REACT_APP_API_BASE}/api/announcements`)
+
       .then(res => setAnnouncements(res.data))
       .catch(err => console.error(err));
   }, []);

@@ -32,7 +32,7 @@ const PostRecruitment = () => {
         ...formData,
         skills: formData.skills.split(",").map((s) => s.trim()), // convert comma string to array
       };
-      await axios.post("http://localhost:5000/api/recruitments", payload);
+      await axios.post(`${process.env.REACT_APP_API_BASE}/api/recruitments`, payload);
       setMessage("Job posted successfully!");
       setFormData({
         title: "",

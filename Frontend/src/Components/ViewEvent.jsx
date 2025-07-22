@@ -22,7 +22,7 @@ const ViewEvents = () => {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         
-        const response = await axios.get('http://localhost:5000/events');
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE}/events`);
         setEvents(response.data.events);
         setLoading(false);
       } catch (err) {
@@ -51,7 +51,7 @@ const ViewEvents = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/events/${eventId}/register`,
+        `${process.env.REACT_APP_API_BASE}/events/${eventId}/register`,
         { userId: localStorage.getItem('userId') },
         {
           headers: {

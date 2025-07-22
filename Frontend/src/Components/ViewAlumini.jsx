@@ -16,7 +16,7 @@ const ViewAlumni = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/alumni', {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE}/alumni`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -55,7 +55,7 @@ const ViewAlumni = () => {
             <div className="alumni-card-header">
               {alum.profilePhoto ? (
                 <img 
-                  src={`http://localhost:5000${alum.profilePhoto}`} 
+                  src={`${process.env.REACT_APP_API_BASE}${alum.profilePhoto}`}
                   alt={alum.name} 
                   className="alumni-photo" 
                   onError={(e) => {
