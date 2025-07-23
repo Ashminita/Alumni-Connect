@@ -24,13 +24,13 @@ const CreateEvent = () => {
         ...eventData,
         createdBy: localStorage.getItem('userId')
       };
-  
+
       if (!/^\d{4}-\d{2}-\d{2}$/.test(eventData.date)) {
         alert('Please use YYYY-MM-DD date format');
         return;
       }
-  
-      const response = await fetch(`${process.env.REACT_APP_API_BASE}/events`, {
+
+      const response = await fetch(`${import.meta.env.VITE_API_BASE}/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,12 +38,12 @@ const CreateEvent = () => {
         },
         body: JSON.stringify(eventPayload)
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to create event');
       }
-  
+
       alert('Event created successfully!');
       navigate('/dashboard');
     } catch (error) {
@@ -56,7 +56,7 @@ const CreateEvent = () => {
     <div className="create-event-container">
       <div className="create-event-card">
         <h1 className="create-event-header">Create New Event</h1>
-        
+
         <form className="event-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name" className="form-label">Event Name</label>
@@ -125,15 +125,15 @@ const CreateEvent = () => {
           </div>
 
           <div className="form-actions">
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="secondary-button"
               onClick={() => navigate('/dashboard')}
             >
               Cancel
             </button>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="primary-button"
             >
               Create Event

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from "../Components/Sidebar"; // Assuming you use the same Sidebar
+import Sidebar from "../Components/Sidebar";
 import '../styles/AchievementList.css';
 
 const AchievementList = () => {
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Sidebar toggle state
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const achievementFilters = [
     {
@@ -30,7 +30,7 @@ const AchievementList = () => {
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE}/api/achievements?page=1&limit=10`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/achievements?page=1&limit=10`);
         if (!response.ok) {
           throw new Error(`HTTP Error! status: ${response.status}`);
         }
@@ -59,15 +59,13 @@ const AchievementList = () => {
 
   return (
     <div className="achievement-page">
-      {/* Hamburger Button */}
       <button
         className="hamburger-btn"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
-        &#9776; {/* Three-line icon */}
+        &#9776;
       </button>
 
-      {/* Sidebar - toggleable */}
       {sidebarOpen && (
         <Sidebar filters={achievementFilters} onFilterChange={setFilters} />
       )}

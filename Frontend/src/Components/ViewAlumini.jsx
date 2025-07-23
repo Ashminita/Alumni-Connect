@@ -16,7 +16,7 @@ const ViewAlumni = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE}/alumni`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE}/alumni`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -32,13 +32,10 @@ const ViewAlumni = () => {
   };
 
   useEffect(() => {
-    // Initial load
     fetchAlumni();
 
-    // Refresh when coming back from edit profile
     if (location.state?.refresh) {
       fetchAlumni();
-      // Clear the refresh state to prevent infinite loops
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location.state?.refresh, navigate, location.pathname]);
@@ -55,7 +52,7 @@ const ViewAlumni = () => {
             <div className="alumni-card-header">
               {alum.profilePhoto ? (
                 <img 
-                  src={`${process.env.REACT_APP_API_BASE}${alum.profilePhoto}`}
+                  src={`${import.meta.env.VITE_API_BASE}${alum.profilePhoto}`}
                   alt={alum.name} 
                   className="alumni-photo" 
                   onError={(e) => {

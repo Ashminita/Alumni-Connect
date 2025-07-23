@@ -30,19 +30,19 @@ const Registration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Enhanced validation
     if (formData.password.length < 8) {
       alert('Password must be at least 8 characters');
       return;
     }
-  
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE}/register`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE}/register`, {
         ...formData,
         userType
       });
-  
+
       if (response.status === 201) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('role', userType);

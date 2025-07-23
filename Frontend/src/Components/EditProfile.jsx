@@ -21,7 +21,7 @@ const EditProfile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`${process.env.REACT_APP_API_BASE}/me`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE}/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -33,8 +33,7 @@ const EditProfile = () => {
         });
 
         if (res.data.profilePhoto) {
-          setPreview(`${process.env.REACT_APP_API_BASE}${res.data.profilePhoto}`);
-;
+          setPreview(`${import.meta.env.VITE_API_BASE}${res.data.profilePhoto}`);
         }
       } catch (err) {
         setError('Failed to fetch profile data');
@@ -72,18 +71,17 @@ const EditProfile = () => {
     try {
       const token = localStorage.getItem('token');
       const formDataToSend = new FormData();
-      
-      // Append all fields
+
       formDataToSend.append('batchYear', formData.batchYear);
       formDataToSend.append('currentJob', formData.currentJob);
       formDataToSend.append('company', formData.company);
       formDataToSend.append('bio', formData.bio);
-      
+
       if (selectedFile) {
         formDataToSend.append('profilePhoto', selectedFile);
       }
 
-      const response = await axios.put(`${process.env.REACT_APP_API_BASE}/alumni/profile`, formDataToSend, {
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE}/alumni/profile`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -91,16 +89,16 @@ const EditProfile = () => {
       });
 
       console.log('Update successful:', response.data);
-      navigate('/view-alumni', { 
-        state: { 
+      navigate('/view-alumni', {
+        state: {
           refresh: true,
-          updatedProfile: response.data.user 
-        } 
+          updatedProfile: response.data.user
+        }
       });
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 
-                         err.response?.data?.errors?.join(', ') || 
-                         'Profile update failed';
+      const errorMessage = err.response?.data?.message ||
+        err.response?.data?.errors?.join(', ') ||
+        'Profile update failed';
       setError(errorMessage);
       console.error('Update error:', err.response?.data || err.message);
     } finally {
@@ -114,7 +112,7 @@ const EditProfile = () => {
     <div className="edit-profile-container">
       <h1>Edit Your Profile</h1>
       {error && <div className="error-message">{error}</div>}
-      
+
       <form onSubmit={handleSubmit} className="profile-form">
         <div className="profile-image-section">
           <div className="image-preview">
@@ -129,8 +127,8 @@ const EditProfile = () => {
           <div className="file-input-container">
             <label className="file-input-label">
               Choose Photo
-              <input 
-                type="file" 
+              <input
+                type="file"
                 accept="image/*"
                 onChange={(e) => setSelectedFile(e.target.files[0])}
                 className="file-input"
@@ -183,8 +181,8 @@ const EditProfile = () => {
         </div>
 
         <div className="form-actions">
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="save-btn"
             disabled={saveLoading}
           >
@@ -194,8 +192,8 @@ const EditProfile = () => {
               </>
             ) : 'Save Changes'}
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="cancel-btn"
             onClick={() => navigate('/view-alumni')}
             disabled={saveLoading}

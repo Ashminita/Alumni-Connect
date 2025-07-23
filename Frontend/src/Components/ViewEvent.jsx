@@ -1,4 +1,3 @@
-// ViewEvents.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ViewEvent.css';
@@ -22,7 +21,7 @@ const ViewEvents = () => {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE}/events`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE}/events`);
         setEvents(response.data.events);
         setLoading(false);
       } catch (err) {
@@ -51,7 +50,7 @@ const ViewEvents = () => {
       }
 
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE}/events/${eventId}/register`,
+        `${import.meta.env.VITE_API_BASE}/events/${eventId}/register`,
         { userId: localStorage.getItem('userId') },
         {
           headers: {

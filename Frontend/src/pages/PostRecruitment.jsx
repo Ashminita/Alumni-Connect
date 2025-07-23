@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/PostRecruitment.css"; // Import the CSS file
+import "../styles/PostRecruitment.css";
 
 const PostRecruitment = () => {
   const [formData, setFormData] = useState({
@@ -30,9 +30,9 @@ const PostRecruitment = () => {
     try {
       const payload = {
         ...formData,
-        skills: formData.skills.split(",").map((s) => s.trim()), // convert comma string to array
+        skills: formData.skills.split(",").map((s) => s.trim()),
       };
-      await axios.post(`${process.env.REACT_APP_API_BASE}/api/recruitments`, payload);
+      await axios.post(`${import.meta.env.VITE_API_BASE}/api/recruitments`, payload);
       setMessage("Job posted successfully!");
       setFormData({
         title: "",

@@ -41,7 +41,7 @@ const RecruitmentList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE}/api/recruitments?page=1&limit=10`);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/recruitments?page=1&limit=10`);
         if (!res.ok) throw new Error(`HTTP Error! status: ${res.status}`);
 
         const data = await res.json();
